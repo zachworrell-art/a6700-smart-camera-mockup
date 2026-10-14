@@ -2,7 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0e17" />
+<meta name="color-scheme" content="dark" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="A6700 Cam" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="manifest" href="manifest.webmanifest" />
 <title>A6700 Smart Camera — Concept Mockup</title>
 <style>
   :root {
@@ -26,8 +36,8 @@
     --warn: #fbbf24;
     --radius: 12px;
     --radius-sm: 8px;
-    --font: "Inter", "SF Pro Display", "Segoe UI", system-ui, -apple-system, sans-serif;
-    --mono: "SF Mono", "JetBrains Mono", "Cascadia Code", ui-monospace, monospace;
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "Cascadia Code", monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -116,13 +126,16 @@
     padding: 14px 20px 16px;
     margin-bottom: 24px;
   }
+  .view-all.viewing { color: var(--text); border-color: var(--text-dim); }
   .stepper-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .stepper-title { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); }
   .view-all {
     appearance: none; background: transparent; border: 1px solid var(--border); color: var(--text-muted);
     font: inherit; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; cursor: pointer;
   }
-  .view-all:hover, .view-all.viewing { color: var(--text); border-color: var(--text-dim); }
+  @media (hover: hover) {
+  .view-all:hover { color: var(--text); border-color: var(--text-dim); }
+  }
   .steps { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); }
   .steps-track {
     position: absolute; left: 10%; right: 10%; top: 17px; height: 4px;
@@ -148,7 +161,9 @@
   }
   .step.current .step-name { color: var(--accent); }
   .step.current .step-state { color: var(--accent); font-weight: 650; }
+  @media (hover: hover) {
   .step:hover .step-name { color: var(--text); }
+  }
   .step.viewing::after {
     content: "viewing"; position: absolute; bottom: -12px; font-size: 0.6rem; font-weight: 700; letter-spacing: .08em;
     text-transform: uppercase; color: var(--text); background: var(--bg-card); border: 1px solid var(--border);
@@ -409,7 +424,9 @@
     border-radius: var(--radius-sm);
     cursor: pointer;
   }
+  @media (hover: hover) {
   .shoot-btn:hover { background: var(--accent-soft); }
+  }
   .shoot-hint { font-size: 0.72rem; color: var(--text-dim); margin-top: 6px; text-align: center; }
 
   /* Side panel — composition score */
@@ -520,7 +537,9 @@
     place-items: center;
   }
 
+  @media (hover: hover) {
   .mic-btn:hover { background: var(--accent-soft); }
+  }
 
   .field-grid {
     display: grid;
@@ -669,7 +688,9 @@
   .lp-card.dismissed .lp-note::before { content: "Advisory dismissed. "; color: var(--text-muted); }
   .lp-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .lp-dismiss { appearance: none; background: transparent; border: none; color: var(--text-dim); font: inherit; font-size: 0.72rem; font-weight: 600; cursor: pointer; padding: 2px 4px; }
+  @media (hover: hover) {
   .lp-dismiss:hover { color: var(--text); }
+  }
   .lp-body { display: flex; gap: 12px; align-items: center; }
   .lp-map { width: 112px; height: 112px; flex-shrink: 0; border-radius: 10px; border: 1px solid var(--border); }
   .lp-maplab { font: 700 9px var(--font); fill: rgba(255,255,255,0.7); }
@@ -778,7 +799,9 @@
     color: #fca5a5;
   }
 
+  @media (hover: hover) {
   .btn.danger:hover { background: rgba(239,68,68,0.25); }
+  }
 
   .status-rows {
     margin-top: 18px;
@@ -1086,6 +1109,129 @@
   /* Stacked fallback for print / no-js: show all if needed via class */
   body.show-all .screen { display: block !important; margin-bottom: 48px; }
   body.show-all .screen + .screen { padding-top: 32px; border-top: 1px solid var(--border-soft); }
+
+  /* ═══════════════ NATIVE / iPHONE LAYER ═══════════════ */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; background: var(--bg); }
+  html, body { overflow-x: hidden; overscroll-behavior-y: none; }
+  button, a, .chip, .step { touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+  body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  img, svg { max-width: 100%; }
+  .tab-ico, .step-all { display: none; }
+  .app-header {
+    position: sticky; top: 0; z-index: 40;
+    margin: -28px -32px 28px; padding: calc(16px + env(safe-area-inset-top)) 32px 16px;
+    background: rgba(10, 14, 23, 0.82);
+    -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px);
+  }
+  .brand > div:last-child { min-width: 0; }
+  .brand h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* press states (haptic-like) */
+  button { transition: transform 90ms ease, filter 90ms ease, background-color 120ms ease; }
+  button:active { transform: scale(0.97); filter: brightness(0.9); }
+  .step:active .node, .step:active .tab-ico { transform: scale(0.9); }
+  .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .scroll-x::-webkit-scrollbar { display: none; }
+
+  @media (max-width: 700px) {
+    .app-shell { padding: 0 16px calc(96px + env(safe-area-inset-bottom)); }
+    .app-header { margin: 0 -16px 16px; padding: calc(8px + env(safe-area-inset-top)) 16px 10px; gap: 10px; }
+    .brand { gap: 10px; min-width: 0; flex: 1; }
+    .brand-mark { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; }
+    .brand-mark svg { width: 18px; height: 18px; }
+    .brand h1 { font-size: 0.95rem; letter-spacing: -0.01em; }
+    .brand p { display: none; }
+    .hdr-right { gap: 6px; flex-shrink: 0; }
+    .clock-badge { padding: 6px 10px; font-size: 0.7rem; white-space: nowrap; }
+    .clock-badge .cb-extra { display: none; }
+    .conn-pill { padding: 0; width: 30px; height: 30px; justify-content: center; }
+    .conn-txt { display: none; }
+
+    /* iOS bottom tab bar */
+    .stepper {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; margin: 0; border-radius: 0;
+      border: none; border-top: 0.5px solid rgba(255,255,255,0.12);
+      padding: 6px max(8px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+      background: rgba(17, 24, 39, 0.86);
+      -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+    }
+    .stepper-head { display: none; }
+    .steps { grid-template-columns: repeat(6, 1fr); }
+    .steps-track { left: 0; right: 0; top: -6px; height: 2px; border-radius: 0; }
+    .step, .step-all { display: flex; min-height: 50px; padding: 4px 0 2px; gap: 2px; justify-content: center; border-radius: 10px; }
+    .step .node, .step .step-state { display: none; }
+    .tab-ico { display: block; position: relative; width: 26px; height: 26px; color: var(--text-dim); transition: transform 90ms ease; }
+    .tab-ico svg { width: 26px; height: 26px; display: block; }
+    .step .step-name { font-size: 0.66rem; font-weight: 600; color: var(--text-dim); letter-spacing: 0; }
+    .step.viewing .tab-ico, .step.viewing .step-name { color: var(--accent); }
+    .step.viewing::after { display: none; }
+    .step.done .tab-ico::after { content: ""; position: absolute; top: -2px; right: -5px; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.5 5.2l1.7 1.6L7.6 3.4' fill='none' stroke='%2304201c' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/10px no-repeat; box-shadow: 0 0 0 2px rgba(17,24,39,1); }
+    .step.current .tab-ico::after { content: ""; position: absolute; top: -1px; right: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px rgba(17,24,39,1), 0 0 8px var(--accent-glow); }
+    .step.current .step-name { color: var(--text-muted); }
+    .step.current.viewing .step-name { color: var(--accent); }
+
+    /* single column everywhere */
+    .plan-layout, .live-layout, .brief-layout, .bh-layout, .results-card { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .live-layout { display: grid; }
+    .live-main, .side-stack { display: contents; }
+    .viewfinder { order: 1; }
+    .score-card { order: 2; }
+    .coach-banner { order: 3; }
+    .live-layout .chips { order: 4; }
+    .settings-strip { order: 5; }
+    .gear-line { order: 6; }
+    .side-stack > .card:not(.score-card) { order: 7; }
+    .screen-label { flex-wrap: wrap; gap: 4px 10px; margin-bottom: 12px; }
+    .screen-label h2 { font-size: 1.1rem; }
+    .card { padding: 16px; border-radius: 14px; }
+    body.show-all .screen + .screen { padding-top: 20px; }
+    .score-ring { width: 220px; height: 220px; }
+    .score-center .num { font-size: 4.4rem; }
+    .goal-label { top: 30px; left: 0; }
+    .coach-banner { flex-wrap: wrap; gap: 12px; padding: 14px 16px; }
+    .coach-banner .icon { width: 44px; height: 44px; border-radius: 12px; }
+    .coach-banner .icon svg { width: 24px; height: 24px; }
+    .coach-banner .tip-body { flex: 1 1 180px; min-width: 0; }
+    .coach-banner .tip { font-size: 1.2rem; }
+    .coach-banner .tip-dir { margin-left: 56px; }
+    .settings-strip { padding: 8px; }
+    .set { padding: 4px 8px; }
+    .field-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .derived-item .dv code { white-space: normal; word-break: break-word; }
+    .slot-track { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; padding-bottom: 4px; }
+    .slot-track::-webkit-scrollbar { display: none; }
+    .timeline-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .slot-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+    .slot-table th, .slot-table td { padding: 8px 10px; }
+    .progress-meta { flex-wrap: wrap; gap: 4px 12px; }
+    .results-left .thumb-wrap { width: 100%; }
+    .btn-row { flex-wrap: wrap; }
+    .chart-head { flex-wrap: wrap; gap: 2px 10px; }
+    .sky-chart { max-width: 100%; }
+    .sc-tick { font-size: 12px; } .sc-card { font-size: 15px; } .sc-ringlab { font-size: 11px; }
+    .sc-now { font-size: 10.5px; } .sc-now-off { font-size: 11.5px; }
+    .legend { gap: 6px 12px; }
+    .core-times { gap: 6px; }
+    .core-times > div { padding: 8px; }
+    .bw-v { font-size: 1.45rem; }
+    .compass { width: 104px; height: 104px; }
+    .lp-body { align-items: flex-start; }
+    .lp-map { width: 96px; height: 96px; }
+    .footer { margin-top: 24px; }
+  }
+  @media (max-width: 700px), (pointer: coarse) {
+    .btn, .chip, .shoot-btn, .view-all, .lp-dismiss, .lp-actions .btn, .mic-btn { min-height: 44px; }
+    .chip { padding: 10px 16px; }
+    .lp-dismiss { min-width: 44px; }
+    .tab-btn, .step { min-height: 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+    button:active, .step:active .node, .step:active .tab-ico { transform: none !important; }
+  }
+  @media (display-mode: standalone) {
+    .footer { padding-bottom: 4px; }
+  }
 </style>
 </head>
 <body>
@@ -1107,9 +1253,9 @@
     </div>
     <div class="hdr-right">
     <div class="clock-badge" id="clock-badge"><!--S:clock-badge-->Example time · 7:07 PM CT · Oct 14 2026 (static)<!--/S:clock-badge--></div>
-    <div class="conn-pill">
+    <div class="conn-pill" aria-label="Sony A6700 USB tethered">
       <span class="conn-dot"></span>
-      Sony A6700 · USB tethered
+      <span class="conn-txt">Sony A6700 · USB tethered</span>
     </div>
     </div>
   </header>
@@ -1122,24 +1268,33 @@
     <div class="steps" role="tablist">
       <div class="steps-track"><i style="width:50%"></i></div>
       <button class="step done" role="tab" data-tab="plan">
+        <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 5.3 5.8.5-4.4 3.8 1.3 5.6L12 15.3 7.1 18.2l1.3-5.6L4 8.8l5.8-.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
         <span class="node"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="step-name">Plan</span><span class="step-state">Sky plan · done</span>
       </button>
       <button class="step done" role="tab" data-tab="brief">
+        <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M6 11a6 6 0 0012 0M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
         <span class="node"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="step-name">Brief</span><span class="step-state">Done</span>
       </button>
       <button class="step current" role="tab" data-tab="live">
+        <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 8V6a2 2 0 012-2h2M20 8V6a2 2 0 00-2-2h-2M4 16v2a2 2 0 002 2h2M20 16v2a2 2 0 01-2 2h-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/></svg></span>
         <span class="node">3</span>
         <span class="step-name">Compose</span><span class="step-state">Current step</span>
       </button>
       <button class="step" role="tab" data-tab="bluehour">
+        <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="7.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 9v4l2.5 2M9.5 2.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
         <span class="node">4</span>
         <span class="step-name">Capture</span><span class="step-state">Blue-hour series</span>
       </button>
       <button class="step" role="tab" data-tab="results">
+        <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="6" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M7 3.5h11.5a2 2 0 012 2V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 17l4-4 3 3 2-2 3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
         <span class="node">5</span>
         <span class="step-name">Results</span><span class="step-state">Composite + files</span>
+      </button>
+      <button class="step step-all" role="tab" data-tab="all" aria-label="View all screens">
+        <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+        <span class="step-name">All</span>
       </button>
     </div>
   </nav>
@@ -1913,8 +2068,8 @@
     }
     return o;
   }
-  function elevSvg(s) {
-    var W = 1100, H = 190, L = 48, Rr = 20, T = 16, B = 32, rg = chartRange(s), span = rg[1] - rg[0];
+  function elevSvg(s, Wopt) {
+    var W = Wopt || 1100, H = 190, L = W < 700 ? 34 : 48, Rr = 20, T = 16, B = 32, rg = chartRange(s), span = rg[1] - rg[0];
     var maxAlt = s.transitAlt || 30, yMax = Math.max(30, Math.ceil(maxAlt / 10) * 10), yMin = -10;
     function ex(t) { return L + (W - L - Rr) * (t - rg[0]) / span; }
     function ey(a) { return T + (H - T - B) * (yMax - a) / (yMax - yMin); }
@@ -1951,6 +2106,7 @@
     } else { var before = s.now < rg[0], x = before ? L + 6 : W - Rr - 6;
       o += '<g class="now-mark"><rect x="' + (before ? x : x - 190) + '" y="' + (T + 22) + '" width="190" height="16" rx="8" fill="rgba(45,212,191,0.15)" stroke="#2dd4bf"/><text x="' + (before ? x + 95 : x - 95) + '" y="' + (T + 33.5) + '" text-anchor="middle" class="ev-now-off">' + (before ? '◀ ' : '') + nl + (before ? ' · chart starts ' + fmtHour(rg[0]) : ' · past chart ▶') + '</text></g>';
     }
+    if (W < 700) o = o.replace('>10° · window threshold<', '>10°<').replace('>moonset 8:33 (static)<', '>moonset 8:33<');
     return o;
   }
   function bhState(s) {
@@ -1984,7 +2140,8 @@
   }
 
   /* ---------- id -> markup map ---------- */
-  function view(s, src) {
+  function view(s, src, opts) {
+    opts = opts || {};
     var v = {}, w = s.window, aimDir = dir16(s.aim.az), opp = dir16(s.aim.az + 180);
     var gpsTxt = src.kind === 'gps' ? latlon(s.lat, s.lon) + '<br><em class="ok-dim">browser GPS ±' + Math.round(src.acc || 0) + ' m</em>'
       : src.kind === 'static' ? latlon(s.lat, s.lon) + ' <em class="ok-dim">· 2 min old</em>'
@@ -2021,7 +2178,7 @@
     v['sp-over'] = polarOver(s);
     var rg = chartRange(s);
     v['elev-title'] = 'Core elevation · ' + fmtHour(rg[0]) + ' – ' + fmtHour(rg[1]) + ' ' + tzLabel(rg[0]).split(' ')[0];
-    v['elev-svg'] = elevSvg(s);
+    v['elev-svg'] = elevSvg(s, opts.elevW);
     // capture
     if (s.bh) {
       var past = s.now >= s.sunset;
@@ -2051,12 +2208,25 @@
   function now() { return isNaN(sim) ? Date.now() : sim + (Date.now() - t0); }
   function update() {
     var n = now(), s = E.compute(n, loc);
-    src.clock = (isNaN(sim) ? 'Live sky · ' : 'Simulated time · ') + E.fmt(n, false) + ' · refresh 30 s';
-    var v = E.view(s, src);
+    src.clock = (isNaN(sim) ? 'Live sky · ' : 'Simulated · ') + E.fmt(n, false) + '<span class="cb-extra"> · refresh 30 s</span>';
+    var es = document.getElementById('elev-svg'), ew = es && es.parentElement ? es.parentElement.clientWidth - 32 : 0;
+    if (ew <= 0) ew = Math.min(document.documentElement.clientWidth, 1280) - 64;
+    var narrow = ew > 0 && ew < 700, W = narrow ? Math.max(300, Math.round(ew)) : 1100;
+    if (es) { es.setAttribute('viewBox', '0 0 ' + W + ' 190'); es.setAttribute('preserveAspectRatio', narrow ? 'xMidYMid meet' : 'none'); }
+    var v = E.view(s, src, { elevW: W });
     for (var id in v) { var el = document.getElementById(id); if (el) el.innerHTML = v[id]; }
     var b = document.getElementById('clock-badge'); if (b) b.classList.toggle('sim', !isNaN(sim));
+    var tr = document.getElementById('bh-slots'), cur = tr && tr.querySelector('.slot.current');
+    if (tr && tr.scrollWidth > tr.clientWidth + 2) {
+      var key = cur ? cur.textContent : 'none';
+      if (tr.dataset.k !== key) { tr.dataset.k = key; tr.scrollLeft = cur ? Math.max(0, cur.parentElement.offsetLeft - tr.clientWidth / 2 + 20) : 0; }
+    }
   }
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(update, 150); });
+  window.addEventListener('orientationchange', function () { setTimeout(update, 300); });
+  window.__skyUpdate = update;
   update(); setInterval(update, 30000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) update(); });
   if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (p) {
     loc = { lat: p.coords.latitude, lon: p.coords.longitude }; src = { kind: 'gps', acc: p.coords.accuracy }; update();
   }, function () {}, { timeout: 8000, maximumAge: 600000 });
@@ -2082,12 +2252,15 @@
     Object.keys(screens).forEach(function (k) {
       screens[k].classList.toggle('active', k === id);
     });
+    if (window.__skyUpdate) window.__skyUpdate();
   }
   controls.forEach(function (c) {
     c.addEventListener('click', function () {
       var id = c.getAttribute('data-tab');
-      history.replaceState(null, '', '#' + id);
+      history.replaceState(null, '', location.search + '#' + id);
       select(id);
+      if (window.matchMedia('(max-width: 700px)').matches) window.scrollTo(0, 0);
+      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
     });
   });
   document.querySelectorAll('.lp-dismiss, .lp-actions .btn:first-child').forEach(function (b) {
@@ -2096,6 +2269,9 @@
   var h = location.hash.replace('#', '');
   select(h === 'all' || screens[h] ? h : 'live');
 })();
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+  }
 </script>
 </body>
 </html>
