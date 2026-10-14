@@ -1110,6 +1110,42 @@
   body.show-all .screen { display: block !important; margin-bottom: 48px; }
   body.show-all .screen + .screen { padding-top: 32px; border-top: 1px solid var(--border-soft); }
 
+
+  /* ═══════════════ SKY AR ═══════════════ */
+  .ar { position: relative; height: min(78vh, 760px); min-height: 420px; border-radius: 18px; overflow: hidden; background: #04070f; border: 1px solid var(--border); isolation: isolate; }
+  .ar-static, .ar-video, .ar-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .ar-video { object-fit: cover; opacity: 0; transition: opacity .4s ease; }
+  .ar.cam .ar-video { opacity: 1; }
+  .ar.js .ar-static { display: none; }
+  .ar-canvas { touch-action: none; }
+  .ar-demo { position: absolute; left: calc(14px + env(safe-area-inset-left)); top: 14px; z-index: 3; font-size: 0.64rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase;
+    color: rgba(226,232,240,.7); padding: 4px 9px; border-radius: 999px; background: rgba(10,14,23,.45); border: 0.5px solid rgba(255,255,255,.14);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); pointer-events: none; }
+  .ar-demo[hidden] { display: none; }
+  .ar-start { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 3; min-width: 132px; min-height: 48px; padding: 0 28px; border-radius: 999px;
+    font: 650 1rem var(--font); color: #0a0e17; background: var(--accent); border: none; box-shadow: 0 8px 28px rgba(240,160,48,.35); cursor: pointer; }
+  .ar-start:active { transform: translateX(-50%) scale(.97); }
+  .ar-start[hidden] { display: none; }
+  .ar-time { position: absolute; right: calc(10px + env(safe-area-inset-right)); top: 56px; bottom: 28px; width: 92px; z-index: 3; display: flex; flex-direction: column; align-items: flex-end; }
+  .ar-now { min-height: 44px; min-width: 64px; padding: 0 16px; margin: -54px 0 10px; border-radius: 999px; border: 0.5px solid rgba(255,255,255,.2); background: rgba(10,14,23,.55);
+    color: var(--teal); font: 650 .78rem var(--font); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); cursor: pointer; position: relative; }
+  .ar-now[hidden] { display: none; }
+  .ar-track { position: relative; flex: 1; width: 92px; touch-action: none; cursor: grab; }
+  .ar-rail { position: absolute; right: 21px; top: 0; bottom: 0; width: 4px; border-radius: 2px; background: linear-gradient(rgba(255,255,255,.28), rgba(255,255,255,.08)); }
+  .ar-thumb { position: absolute; right: 0; top: 0; transform: translateY(-50%); min-width: 46px; height: 44px; padding: 0 12px; border-radius: 22px; display: flex; align-items: center; justify-content: center;
+    font: 650 .74rem var(--font); color: #fff; white-space: nowrap; background: rgba(17,24,39,.62); border: 0.5px solid rgba(255,255,255,.22);
+    -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); box-shadow: 0 4px 18px rgba(0,0,0,.35); outline: none; }
+  .ar-thumb:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
+  @media (max-width: 700px) {
+    body.ar-full { overflow: hidden; }
+    body.ar-full .ar-label { display: none; }
+    body.ar-full:not(.show-all) .ar { position: fixed; inset: 0; height: auto; min-height: 0; border: none; border-radius: 0; z-index: 30; }
+    body.ar-full:not(.show-all) .ar-demo { top: calc(62px + env(safe-area-inset-top)); }
+    body.ar-full:not(.show-all) .ar-time { top: calc(118px + env(safe-area-inset-top)); bottom: calc(96px + env(safe-area-inset-bottom)); }
+    body.ar-full:not(.show-all) .ar-start { bottom: calc(96px + env(safe-area-inset-bottom)); }
+    body.ar-full .footer { display: none; }
+    body.show-all .ar { height: 72vh; }
+  }
   /* ═══════════════ NATIVE / iPHONE LAYER ═══════════════ */
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; background: var(--bg); }
   html, body { overflow-x: hidden; overscroll-behavior-y: none; }
@@ -1270,7 +1306,7 @@
       <button class="step done" role="tab" data-tab="plan">
         <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 5.3 5.8.5-4.4 3.8 1.3 5.6L12 15.3 7.1 18.2l1.3-5.6L4 8.8l5.8-.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
         <span class="node"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="step-name">Plan</span><span class="step-state">Sky plan · done</span>
+        <span class="step-name">Sky</span><span class="step-state">Sky AR</span>
       </button>
       <button class="step done" role="tab" data-tab="brief">
         <span class="tab-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M6 11a6 6 0 0012 0M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
@@ -1299,154 +1335,34 @@
     </div>
   </nav>
 
-  <!-- ════════ STEP 1: SKY PLAN ════════ -->
-  <section class="screen" id="screen-plan" role="tabpanel">
-    <div class="screen-label">
-      <h2>1 · Sky Plan</h2>
-      <span>Computed from the camera's GPS + current time · example data</span>
+  <!-- ════════ STEP 1: SKY AR ════════ -->
+  <section class="screen" id="screen-plan" role="tabpanel" aria-label="Sky AR">
+    <div class="screen-label ar-label">
+      <h2>1 · Sky AR</h2>
+      <span>Live overlay · camera + compass</span>
     </div>
-
-    <div class="plan-layout">
-      <div class="plan-col">
-        <div class="card">
-          <div class="card-title">Location &amp; time</div>
-          <div class="meta-list">
-            <div class="meta-row"><span class="k">GPS fix</span><span class="v" id="sp-gps"><!--S:sp-gps-->36.2°N, 89.9°W <em class="ok-dim">· 2 min old</em><!--/S:sp-gps--></span></div>
-            <div class="meta-row"><span class="k">Date</span><span class="v" id="sp-date"><!--S:sp-date-->Wed, Oct 14, 2026<!--/S:sp-date--></span></div>
-            <div class="meta-row"><span class="k">Time zone</span><span class="v" id="sp-tz"><!--S:sp-tz-->CT (CDT, UTC−5)<!--/S:sp-tz--></span></div>
-            <div class="meta-row"><span class="k">Sunset</span><span class="v" id="sp-sunset"><!--S:sp-sunset-->6:25 PM<!--/S:sp-sunset--></span></div>
-            <div class="meta-row"><span class="k">Astro twilight ends</span><span class="v accent" id="sp-astro"><!--S:sp-astro-->7:51 PM<!--/S:sp-astro--></span></div>
-            <div class="meta-row"><span class="k">Moon</span><span class="v" id="sp-moon"><!--S:sp-moon--><span class="moon-ico" aria-hidden="true"></span>Waxing crescent · 18%<!--/S:sp-moon--></span></div>
-            <div class="meta-row"><span class="k">Moonset</span><span class="v" id="sp-moonset"><!--S:sp-moonset-->8:33 PM <em class="ok-dim">· WSW, near the core</em><!--/S:sp-moonset--></span></div>
-          </div>
-        </div>
-
-        <div class="card lp-card" role="note" aria-label="Light pollution advisory">
-          <div class="lp-head">
-            <div class="card-title" style="margin:0">Light pollution · advisory</div>
-            <button class="lp-dismiss" aria-label="Dismiss advisory">Dismiss ✕</button>
-          </div>
-          <div class="lp-body">
-            <svg class="lp-map" viewBox="0 0 140 140" role="img" aria-label="Light pollution around the pin (example)">
-  <defs>
-    <radialGradient id="lpTown" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff2c0"/><stop offset="25%" stop-color="#f59e0b"/><stop offset="55%" stop-color="#b45309" stop-opacity="0.7"/><stop offset="100%" stop-color="#1e3a5f" stop-opacity="0"/></radialGradient>
-    <radialGradient id="lpTown2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9"/><stop offset="60%" stop-color="#92400e" stop-opacity="0.5"/><stop offset="100%" stop-color="#1e3a5f" stop-opacity="0"/></radialGradient>
-    <radialGradient id="lpBase" cx="45%" cy="60%" r="75%"><stop offset="0%" stop-color="#2f5a6e"/><stop offset="60%" stop-color="#173452"/><stop offset="100%" stop-color="#0b1a33"/></radialGradient>
-    <clipPath id="lpClip"><rect width="140" height="140" rx="10"/></clipPath>
-  </defs>
-  <g clip-path="url(#lpClip)">
-    <rect width="140" height="140" fill="url(#lpBase)"/>
-    <ellipse cx="74" cy="140" rx="46" ry="34" fill="url(#lpTown)"/>
-    <ellipse cx="10" cy="40" rx="26" ry="22" fill="url(#lpTown2)"/>
-    <ellipse cx="118" cy="20" rx="30" ry="26" fill="#060d1f" opacity="0.85"/>
-    <path d="M96 0 C100 30 88 60 104 90 C114 112 108 128 112 140" stroke="#0d2747" stroke-width="5" fill="none" opacity="0.8"/>
-    <g stroke="#ffffff" stroke-opacity="0.06"><path d="M0 47h140M0 93h140M47 0v140M93 0v140"/></g>
-  </g>
-  <g transform="translate(70 70)"><circle r="16" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-dasharray="2 3"/><path d="M0 -11 C6 -11 9 -6 9 -2 C9 4 0 11 0 11 C0 11 -9 4 -9 -2 C-9 -6 -6 -11 0 -11Z" fill="#f0a030" stroke="#1a1005" stroke-width="1.5"/><circle cy="-3" r="3" fill="#1a1005"/></g>
-  <g transform="translate(116 22)"><circle r="5" fill="none" stroke="#2dd4bf" stroke-width="2"/><circle r="1.6" fill="#2dd4bf"/></g>
-  <path d="M82 58 L108 32" stroke="#2dd4bf" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <text x="128" y="134" text-anchor="end" class="lp-maplab">glow S</text>
-  <text x="6" y="12" class="lp-maplab">N ↑</text>
-</svg>
-            <div class="lp-info">
-              <div class="bortle"><span class="bortle-num">4</span><span class="bortle-txt"><b>Bortle 4</b>Rural / suburban transition</span></div>
-              <div class="lp-scale" aria-hidden="true"><i style="--c:#0b1a33"></i><i style="--c:#173452"></i><i style="--c:#2f5a6e"></i><i class="on" style="--c:#4d7c5a"></i><i style="--c:#a3a33a"></i><i style="--c:#d97706"></i><i style="--c:#ea580c"></i><i style="--c:#f59e0b"></i><i style="--c:#fde68a"></i></div>
-              <div class="lp-meta">≈ 20.6 mag/arcsec² · some glow low in the S–SW, in the core's direction</div>
-            </div>
-          </div>
-          <div class="lp-alt"><span class="lp-dot"></span><span>Darker spot <b>12 mi NE</b> · Bortle 3 · ~20 min drive</span></div>
-          <div class="lp-actions">
-            <button class="btn">Proceed anyway</button>
-            <button class="btn ghost">Show darker spot</button>
-          </div>
-          <p class="lp-note">Advisory only, you can always shoot here. Planning and shooting are never blocked.</p>
+    <div class="ar" id="ar">
+      <svg class="ar-static" viewBox="0 0 390 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><linearGradient id="arBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04070f"/><stop offset="1" stop-color="#0c1426"/></linearGradient>
+        <filter id="arBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+        <radialGradient id="arCore"><stop offset="0" stop-color="#ffe9c4" stop-opacity=".8"/><stop offset=".5" stop-color="#ffbe78" stop-opacity=".25"/><stop offset="1" stop-color="#ffbe78" stop-opacity="0"/></radialGradient></defs>
+        <rect width="390" height="600" fill="url(#arBg)"/>
+        <path d="M-40 520 C 80 420 180 300 430 60" stroke="#8fb4dc" stroke-opacity=".35" stroke-width="90" fill="none" filter="url(#arBlur)"/>
+        <path d="M-40 520 C 80 420 180 300 430 60" stroke="#f3dcb8" stroke-opacity=".35" stroke-width="30" fill="none" filter="url(#arBlur)"/>
+        <ellipse cx="150" cy="380" rx="70" ry="50" fill="url(#arCore)" transform="rotate(-40 150 380)"/>
+        <rect y="470" width="390" height="130" fill="#05080e"/><line x1="0" y1="470" x2="390" y2="470" stroke="#c8e1ff" stroke-opacity=".25"/>
+      </svg>
+      <video id="ar-video" class="ar-video" playsinline muted autoplay aria-hidden="true"></video>
+      <canvas id="ar-sky" class="ar-canvas" aria-label="Milky Way overlay"></canvas>
+      <span class="ar-demo" id="ar-demo">Demo mode</span>
+      <button class="ar-start" id="ar-start" type="button">Start</button>
+      <div class="ar-time" aria-label="Time">
+        <button class="ar-now" id="ar-now" type="button" hidden>Now</button>
+        <div class="ar-track" id="ar-track">
+          <div class="ar-rail"></div>
+          <div class="ar-thumb" id="ar-thumb" role="slider" tabindex="0" aria-label="Time of night" aria-valuetext="Now"><span id="ar-tlab">Now</span></div>
         </div>
       </div>
-
-      <div class="card chart-card">
-        <div class="chart-head">
-          <div class="card-title" style="margin:0">Milky Way core path · tonight</div>
-          <span class="chart-sub">looking up · N top, E left</span>
-        </div>
-        <svg class="sky-chart" viewBox="-14 -12 456 438" role="img" aria-label="Polar sky chart">
-  <defs>
-    <radialGradient id="spSky" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#0b1330"/><stop offset="85%" stop-color="#0f1838"/><stop offset="100%" stop-color="#1c2148"/></radialGradient>
-    <filter id="spBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
-    <filter id="spGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
-    <clipPath id="spClip"><circle cx="200" cy="200" r="170"/></clipPath>
-  </defs>
-  <circle cx="200" cy="200" r="170" fill="url(#spSky)"/>
-  <g id="sp-under"><!--S:sp-under--><g clip-path="url(#spClip)"><g fill="none" stroke-linecap="round" filter="url(#spBlur)"><g stroke="#9aa6ff" stroke-opacity="0.22" stroke-width="34"><path d="M303.8 333.0 L301.8 329.8 L299.8 326.6 L297.7 323.4 L295.7 320.2 L293.6 317.0 L291.6 313.8 L289.5 310.7 L287.4 307.5 L285.3 304.3 L283.2 301.2 L281.1 298.1 L279.0 294.9 L276.8 291.8 L274.7 288.7 L272.5 285.6 L270.4 282.5 L268.2 279.4 L266.0 276.3 L263.9 273.2 L261.7 270.1 L259.5 267.0 L257.3 263.9 L255.1 260.9 L252.9 257.8 L250.6 254.7 L248.4 251.7 L246.2 248.6 L244.0 245.6 L241.7 242.5 L239.5 239.5 L237.2 236.4 L235.0 233.4 L232.7 230.4 L230.4 227.4 L228.1 224.3 L225.9 221.3 L223.6 218.3 L221.3 215.3 L219.0 212.3 L216.7 209.3 L214.4 206.3 L212.1 203.3 L209.8 200.3 L207.5 197.3 L205.1 194.3 L202.8 191.4 L200.5 188.4 L198.1 185.4 L195.8 182.4 L193.4 179.5 L191.1 176.5 L188.7 173.6 L186.4 170.6 L184.0 167.7 L181.6 164.7 L179.3 161.8 L176.9 158.8 L174.5 155.9 L172.1 153.0 L169.7 150.1 L167.3 147.1 L164.9 144.2 L162.5 141.3 L160.1 138.4 L157.6 135.5 L155.2 132.6 L152.8 129.7 L150.3 126.8 L147.9 123.9 L145.4 121.1 L143.0 118.2 L140.5 115.3 L138.0 112.5 L135.5 109.6 L133.0 106.8 L130.5 103.9 L128.0 101.1 L125.5 98.3 L123.0 95.4 L120.5 92.6 L117.9 89.8 L115.4 87.0 L112.8 84.2 L110.2 81.5 L107.7 78.7 L105.1 75.9 L102.5 73.2 L99.9 70.4 L97.2 67.7"/></g><g stroke="#ffe1b0" stroke-opacity="0.18" stroke-width="14"><path d="M303.8 333.0 L301.8 329.8 L299.8 326.6 L297.7 323.4 L295.7 320.2 L293.6 317.0 L291.6 313.8 L289.5 310.7 L287.4 307.5 L285.3 304.3 L283.2 301.2 L281.1 298.1 L279.0 294.9 L276.8 291.8 L274.7 288.7 L272.5 285.6 L270.4 282.5 L268.2 279.4 L266.0 276.3 L263.9 273.2 L261.7 270.1 L259.5 267.0 L257.3 263.9 L255.1 260.9 L252.9 257.8 L250.6 254.7 L248.4 251.7 L246.2 248.6 L244.0 245.6 L241.7 242.5 L239.5 239.5 L237.2 236.4 L235.0 233.4 L232.7 230.4 L230.4 227.4 L228.1 224.3 L225.9 221.3 L223.6 218.3 L221.3 215.3 L219.0 212.3 L216.7 209.3 L214.4 206.3 L212.1 203.3 L209.8 200.3 L207.5 197.3 L205.1 194.3 L202.8 191.4 L200.5 188.4 L198.1 185.4 L195.8 182.4 L193.4 179.5 L191.1 176.5 L188.7 173.6 L186.4 170.6 L184.0 167.7 L181.6 164.7 L179.3 161.8 L176.9 158.8 L174.5 155.9 L172.1 153.0 L169.7 150.1 L167.3 147.1 L164.9 144.2 L162.5 141.3 L160.1 138.4 L157.6 135.5 L155.2 132.6 L152.8 129.7 L150.3 126.8 L147.9 123.9 L145.4 121.1 L143.0 118.2 L140.5 115.3 L138.0 112.5 L135.5 109.6 L133.0 106.8 L130.5 103.9 L128.0 101.1 L125.5 98.3 L123.0 95.4 L120.5 92.6 L117.9 89.8 L115.4 87.0 L112.8 84.2 L110.2 81.5 L107.7 78.7 L105.1 75.9 L102.5 73.2 L99.9 70.4 L97.2 67.7"/></g></g><circle cx="291.5" cy="314.0" r="34" fill="#ffd9a0" opacity="0.28" filter="url(#spBlur)"/></g><!--/S:sp-under--></g>
-  <circle cx="200" cy="200" r="113.3" class="sc-ring"/><text x="204" y="98.7" class="sc-ringlab">30°</text><circle cx="200" cy="200" r="56.7" class="sc-ring"/><text x="204" y="155.3" class="sc-ringlab">60°</text><line x1="200" y1="200" x2="200.0" y2="30.0" class="sc-az"/><line x1="200" y1="200" x2="79.8" y2="79.8" class="sc-az"/><line x1="200" y1="200" x2="30.0" y2="200.0" class="sc-az"/><line x1="200" y1="200" x2="79.8" y2="320.2" class="sc-az"/><line x1="200" y1="200" x2="200.0" y2="370.0" class="sc-az"/><line x1="200" y1="200" x2="320.2" y2="320.2" class="sc-az"/><line x1="200" y1="200" x2="370.0" y2="200.0" class="sc-az"/><line x1="200" y1="200" x2="320.2" y2="79.8" class="sc-az"/>
-  <circle cx="200" cy="200" r="170" class="sc-horizon"/>
-  <text x="200" y="22" text-anchor="middle" class="sc-card">N</text>
-  <text x="200" y="388" text-anchor="middle" class="sc-card">S</text>
-  <text x="16" y="205" text-anchor="middle" class="sc-card">E</text>
-  <text x="384" y="205" text-anchor="middle" class="sc-card">W</text>
-  <circle cx="200" cy="200" r="2" fill="#5a6a84"/><text x="206" y="196" class="sc-ringlab">zenith</text>
-  <g id="sp-over"><!--S:sp-over--><path d="M177.6 322.7 L178.7 322.7 L179.7 322.7 L180.7 322.8 L181.8 322.8 L182.8 322.9 L183.9 322.9 L184.9 322.9 L185.9 323.0 L187.0 323.0 L188.0 323.0 L189.0 323.1 L190.1 323.1 L191.1 323.1 L192.2 323.1 L193.2 323.1 L194.2 323.2 L195.3 323.2 L196.3 323.2 L197.4 323.2 L198.4 323.2 L199.4 323.2 L200.5 323.2 L201.5 323.2 L202.5 323.2 L203.6 323.2 L204.6 323.2 L205.7 323.2 L206.7 323.1 L207.7 323.1 L208.8 323.1 L209.8 323.1 L210.9 323.1 L211.9 323.0 L212.9 323.0 L214.0 323.0 L215.0 322.9 L216.0 322.9 L217.1 322.9 L218.1 322.8 L219.2 322.8 L220.2 322.8 L221.2 322.7 L222.3 322.7 L223.3 322.6 L224.3 322.6 L225.4 322.5 L226.4 322.4 L227.5 322.4 L228.5 322.3 L229.5 322.3 L230.6 322.2 L231.6 322.1 L232.6 322.0 L233.7 322.0 L234.7 321.9 L235.8 321.8 L236.8 321.7 L237.8 321.6 L238.9 321.6 L239.9 321.5 L240.9 321.4 L242.0 321.3 L243.0 321.2 L244.0 321.1 L245.1 321.0 L246.1 320.9 L247.2 320.8 L248.2 320.7 L249.2 320.6 L250.3 320.5 L251.3 320.3 L252.3 320.2 L253.4 320.1 L254.4 320.0 L255.4 319.9 L256.5 319.7 L257.5 319.6 L258.5 319.5 L259.6 319.3 L260.6 319.2 L261.6 319.1 L262.7 318.9 L263.7 318.8 L264.7 318.6 L265.8 318.5 L266.8 318.3 L267.9 318.2 L268.9 318.0 L269.9 317.9 L271.0 317.7 L272.0 317.5 L273.0 317.4 L274.0 317.2 L275.1 317.0 L276.1 316.9 L277.1 316.7 L278.2 316.5 L279.2 316.3 L280.2 316.2 L281.3 316.0 L282.3 315.8" class="sc-path-day"/><path d="M282.3 315.8 L283.3 315.6 L284.4 315.4 L285.4 315.2 L286.4 315.0 L287.5 314.8 L288.5 314.6 L289.5 314.4 L290.5 314.2 L291.6 314.0 L292.6 313.8 L293.6 313.5 L294.7 313.3 L295.7 313.1 L296.7 312.9 L297.7 312.6 L298.8 312.4 L299.8 312.2 L300.8 311.9 L301.9 311.7 L302.9 311.5 L303.9 311.2 L304.9 311.0 L306.0 310.7 L307.0 310.5 L308.0 310.2 L309.0 310.0 L310.1 309.7 L311.1 309.4 L312.1 309.2 L313.1 308.9 L314.2 308.6 L315.2 308.4 L316.2 308.1 L317.2 307.8 L318.2 307.5 L319.3 307.2 L320.3 307.0 L321.3 306.7 L322.3 306.4 L323.3 306.1 L324.4 305.8 L325.4 305.5 L326.4 305.2 L327.4 304.9 L328.4 304.5 L329.5 304.2 L330.5 303.9 L331.5 303.6 L332.5 303.3 L333.5 302.9 L334.6 302.6 L335.6 302.3" class="sc-path"/><path d="M281.3 316.0 L282.3 315.8 L283.3 315.6 L284.4 315.4 L285.4 315.2 L286.4 315.0 L287.5 314.8 L288.5 314.6 L289.5 314.4 L290.5 314.2 L291.6 314.0 L292.6 313.8 L293.6 313.5 L294.7 313.3 L295.7 313.1 L296.7 312.9 L297.7 312.6 L298.8 312.4 L299.8 312.2 L300.8 311.9 L301.7 311.7" class="sc-best-glow" filter="url(#spGlow)"/><path d="M281.3 316.0 L282.3 315.8 L283.3 315.6 L284.4 315.4 L285.4 315.2 L286.4 315.0 L287.5 314.8 L288.5 314.6 L289.5 314.4 L290.5 314.2 L291.6 314.0 L292.6 313.8 L293.6 313.5 L294.7 313.3 L295.7 313.1 L296.7 312.9 L297.7 312.6 L298.8 312.4 L299.8 312.2 L300.8 311.9 L301.7 311.7" class="sc-best"/><g><circle cx="193.2" cy="323.1" r="3.2" fill="#0a0e17" stroke="#5a6a84" stroke-width="1.6"/><text x="195.2" y="290.2" text-anchor="middle" class="sc-tick dim">5 PM transit</text></g><g><circle cx="224.3" cy="322.6" r="3.2" fill="#0a0e17" stroke="#5a6a84" stroke-width="1.6"/><text x="221.4" y="310.8" text-anchor="middle" class="sc-tick dim">6 PM</text></g><g><circle cx="255.4" cy="319.9" r="3.2" fill="#0a0e17" stroke="#5a6a84" stroke-width="1.6"/><text x="249.1" y="309.3" text-anchor="middle" class="sc-tick dim">7 PM</text></g><g><circle cx="286.4" cy="315.0" r="3.2" fill="#0a0e17" stroke="#f0a030" stroke-width="1.6"/><text x="277.4" y="306.0" text-anchor="middle" class="sc-tick">8 PM</text></g><g><circle cx="317.2" cy="307.8" r="3.2" fill="#0a0e17" stroke="#f0a030" stroke-width="1.6"/><text x="306.2" y="300.7" text-anchor="middle" class="sc-tick">9 PM</text></g><g><path d="M335.9 302.2 L404 338" stroke="#f87171" stroke-opacity=".6" stroke-width="1"/><circle cx="335.9" cy="302.2" r="4" fill="#ef4444"/><text x="440" y="350" text-anchor="end" class="sc-tick red">Core sets 9:37 PM · 233°</text></g><g><path d="M322.8 303.4 L352 390" stroke="#e8edf5" stroke-opacity=".45" stroke-width="1"/><g transform="translate(322.8 303.4)"><circle r="6" fill="#e8edf5"/><circle cx="-3.2" cy="-1" r="6" fill="#0f1838"/></g><text x="440" y="402" text-anchor="end" class="sc-tick moon">Moon 18% at 8 PM · sets 8:33 (static)</text></g><g><circle cx="291.5" cy="314.0" r="9" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="291.5" cy="314.0" r="3" fill="#fff"/></g><g class="now-mark"><path d="M259.4 311.4 l6 8 -6 8 -6 -8z" fill="#2dd4bf" stroke="#04201c" stroke-width="1.2"/><line x1="259.4" y1="319.4" x2="272.8" y2="346.2" stroke="#2dd4bf" stroke-width="1.2"/><rect x="223.8" y="338.7" width="98.0" height="15" rx="7.5" fill="#2dd4bf"/><text x="272.8" y="349.2" text-anchor="middle" class="sc-now">EXAMPLE 7:07 PM</text></g><!--/S:sp-over--></g>
-</svg>
-        <div class="legend">
-          <span><i class="lg-best"></i>Best window</span>
-          <span><i class="lg-dark"></i>Core path (dark sky)</span>
-          <span><i class="lg-day"></i>In daylight / twilight</span>
-          <span><i class="lg-band"></i><span id="sp-lg-band"><!--S:sp-lg-band-->Galactic band (8:10 PM)<!--/S:sp-lg-band--></span></span>
-          <span><i class="lg-rec"></i><span id="sp-lg-rec"><!--S:sp-lg-rec-->Aim point 8:10 PM<!--/S:sp-lg-rec--></span></span><span><i class="lg-now"></i>NOW (updates every 30 s)</span>
-        </div>
-      </div>
-
-      <div class="plan-col">
-        <div class="card">
-          <div class="card-title">Galactic core · times</div>
-          <div class="core-times">
-            <div><span class="k">Rises</span><span class="v" id="ct-rise"><!--S:ct-rise-->12:50 PM<!--/S:ct-rise--></span><span class="s" id="ct-rise-s"><!--S:ct-rise-s-->SE · daylight<!--/S:ct-rise-s--></span></div>
-            <div><span class="k">Transit</span><span class="v" id="ct-transit"><!--S:ct-transit-->5:13 PM<!--/S:ct-transit--></span><span class="s" id="ct-transit-s"><!--S:ct-transit-s-->25° S · daylight<!--/S:ct-transit-s--></span></div>
-            <div><span class="k">Sets</span><span class="v" id="ct-set"><!--S:ct-set-->9:37 PM<!--/S:ct-set--></span><span class="s" id="ct-set-s"><!--S:ct-set-s-->233° SW<!--/S:ct-set-s--></span></div>
-          </div>
-          <div class="best-window">
-            <div class="bw-k">Best window · dark sky + core above 10°</div>
-            <div class="bw-v" id="bw-v"><!--S:bw-v-->7:51 – 8:30 PM <span>CT</span><!--/S:bw-v--></div>
-            <div class="bw-s" id="bw-s"><!--S:bw-s-->Short, low in the SW: core drops from 15° to 10° (dark sky, core above 10°). Crescent moon (static) sets 8:33 PM just right of the core; contrast improves after it goes.<!--/S:bw-s--></div>
-          </div>
-        </div>
-
-        <div class="card aim-card">
-          <div class="card-title" id="aim-title"><!--S:aim-title-->Point the camera · 8:10 PM (mid-window)<!--/S:aim-title--></div>
-          <div class="aim-row">
-            <svg class="compass" viewBox="0 0 120 120" role="img" aria-label="Compass showing the aim azimuth">
-              <circle cx="60" cy="60" r="54" fill="#0d1320" stroke="#243044" stroke-width="2"/>
-              <g stroke="#5a6a84" stroke-width="1.5"><line x1="60" y1="8" x2="60" y2="14" transform="rotate(0 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(30 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(60 60 60)"/><line x1="60" y1="8" x2="60" y2="14" transform="rotate(90 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(120 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(150 60 60)"/><line x1="60" y1="8" x2="60" y2="14" transform="rotate(180 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(210 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(240 60 60)"/><line x1="60" y1="8" x2="60" y2="14" transform="rotate(270 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(300 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(330 60 60)"/></g>
-              <text x="60" y="27" text-anchor="middle" class="cp-n">N</text>
-              <text x="96" y="64" text-anchor="middle" class="cp-l">E</text>
-              <text x="60" y="101" text-anchor="middle" class="cp-l">S</text>
-              <text x="24" y="64" text-anchor="middle" class="cp-l">W</text>
-              <g id="aim-arrow"><!--S:aim-arrow--><g transform="rotate(219 60 60)"><path d="M60 60 L60 16" stroke="#f0a030" stroke-width="4" stroke-linecap="round"/><path d="M51 24 L60 9 L69 24 Z" fill="#f0a030"/><circle cx="60" cy="60" r="5" fill="#f0a030"/></g><!--/S:aim-arrow--></g>
-            </svg>
-            <div class="aim-vals">
-              <div><span class="k">Azimuth</span><span class="v" id="aim-az"><!--S:aim-az-->219° <em>SW</em><!--/S:aim-az--></span></div>
-              <div><span class="k">Elevation</span><span class="v" id="aim-el"><!--S:aim-el-->13°<!--/S:aim-el--></span></div>
-              <div class="aim-lens">13mm landscape: core sits ~⅓ up the frame with the horizon on the lower third</div>
-            </div>
-          </div>
-          <div class="placement">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="#2dd4bf" stroke-width="2"/></svg>
-            <span id="aim-place"><!--S:aim-place-->Put the combine about <b>219° SW</b> of where you stand, so it sits in front of the core. Equivalently, set up <b>NE of the combine</b> and shoot toward it.<!--/S:aim-place--></span>
-          </div>
-        </div>
-
-        <div class="use-plan">
-          <button class="shoot-btn">Use this plan</button>
-          <div class="shoot-hint">Sends the window and aim point to the Shot Brief and the blue-hour scheduler</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card elev-card">
-      <div class="chart-head">
-        <div class="card-title" style="margin:0" id="elev-title"><!--S:elev-title-->Core elevation · 5 PM – 10 PM CT<!--/S:elev-title--></div>
-        <span class="chart-sub">sun: NOAA formulas · core: sidereal time · NOW marker updates every 30 s</span>
-      </div>
-      <svg class="elev-chart" id="elev-svg" viewBox="0 0 1100 190" preserveAspectRatio="none" role="img" aria-label="Core elevation over time"><!--S:elev-svg--><defs><linearGradient id="evArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0a030" stop-opacity="0.35"/><stop offset="100%" stop-color="#f0a030" stop-opacity="0"/></linearGradient><linearGradient id="evTw" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3b3a6a" stop-opacity="0.55"/><stop offset="100%" stop-color="#0a0e17" stop-opacity="0"/></linearGradient><clipPath id="evClip"><rect x="48" y="16" width="1032" height="106.5"/></clipPath></defs><rect x="48" y="16" width="291.6" height="142.0" fill="#2a3358" opacity="0.45"/><rect x="339.6" y="16" width="293.6" height="142.0" fill="url(#evTw)"/><rect x="633.2" y="16" width="136.4" height="142.0" fill="#f0a030" opacity="0.12"/><line x1="633.2" x2="633.2" y1="16" y2="158.0" stroke="#f0a030" stroke-opacity="0.6" stroke-dasharray="3 3"/><line x1="769.6" x2="769.6" y1="16" y2="158.0" stroke="#f0a030" stroke-opacity="0.6" stroke-dasharray="3 3"/><line x1="48" x2="1080" y1="16.0" y2="16.0" class="ev-grid"/><text x="40" y="20.0" text-anchor="end" class="ev-lab">30°</text><line x1="48" x2="1080" y1="51.5" y2="51.5" class="ev-grid"/><text x="40" y="55.5" text-anchor="end" class="ev-lab">20°</text><line x1="48" x2="1080" y1="87.0" y2="87.0" class="ev-grid"/><text x="40" y="91.0" text-anchor="end" class="ev-lab">10°</text><line x1="48" x2="1080" y1="122.5" y2="122.5" class="ev-grid"/><text x="40" y="126.5" text-anchor="end" class="ev-lab">0°</text><line x1="48" x2="1080" y1="158.0" y2="158.0" class="ev-grid"/><text x="40" y="162.0" text-anchor="end" class="ev-lab">-10°</text><text x="48.0" y="180" text-anchor="middle" class="ev-lab">5 PM</text><line x1="48.0" x2="48.0" y1="16" y2="158.0" class="ev-vgrid"/><text x="254.4" y="180" text-anchor="middle" class="ev-lab">6 PM</text><line x1="254.4" x2="254.4" y1="16" y2="158.0" class="ev-vgrid"/><text x="460.8" y="180" text-anchor="middle" class="ev-lab">7 PM</text><line x1="460.8" x2="460.8" y1="16" y2="158.0" class="ev-vgrid"/><text x="667.2" y="180" text-anchor="middle" class="ev-lab">8 PM</text><line x1="667.2" x2="667.2" y1="16" y2="158.0" class="ev-vgrid"/><text x="873.6" y="180" text-anchor="middle" class="ev-lab">9 PM</text><line x1="873.6" x2="873.6" y1="16" y2="158.0" class="ev-vgrid"/><text x="1080.0" y="180" text-anchor="middle" class="ev-lab">10 PM</text><line x1="1080.0" x2="1080.0" y1="16" y2="158.0" class="ev-vgrid"/><line x1="48" x2="1080" y1="122.5" y2="122.5" class="ev-horizon"/><line x1="48" x2="1080" y1="87.0" y2="87.0" class="ev-haze"/><text x="1076" y="82.0" text-anchor="end" class="ev-lab haze">10° · window threshold</text><path d="M48.0 34.8 L65.2 34.6 L82.4 34.5 L99.6 34.5 L116.8 34.6 L134.0 34.7 L151.2 35.0 L168.4 35.2 L185.6 35.6 L202.8 36.1 L220.0 36.6 L237.2 37.2 L254.4 37.8 L271.6 38.6 L288.8 39.4 L306.0 40.2 L323.2 41.2 L340.4 42.2 L357.6 43.3 L374.8 44.5 L392.0 45.7 L409.2 47.0 L426.4 48.3 L443.6 49.7 L460.8 51.2 L478.0 52.7 L495.2 54.3 L512.4 56.0 L529.6 57.7 L546.8 59.5 L564.0 61.3 L581.2 63.2 L598.4 65.1 L615.6 67.1 L632.8 69.1 L650.0 71.2 L667.2 73.4 L684.4 75.5 L701.6 77.8 L718.8 80.0 L736.0 82.4 L753.2 84.7 L770.4 87.1 L787.6 89.6 L804.8 92.0 L822.0 94.5 L839.2 97.1 L856.4 99.7 L873.6 102.3 L890.8 105.0 L908.0 107.7 L925.2 110.4 L942.4 113.2 L959.6 115.9 L976.8 118.8 L994.0 121.6 L1011.2 124.5 L1028.4 127.4 L1045.6 130.3 L1062.8 133.3 L1080.0 136.2 L1080.0 158.0 L48.0 158.0 Z" fill="url(#evArea)" clip-path="url(#evClip)"/><path d="M48.0 34.8 L65.2 34.6 L82.4 34.5 L99.6 34.5 L116.8 34.6 L134.0 34.7 L151.2 35.0 L168.4 35.2 L185.6 35.6 L202.8 36.1 L220.0 36.6 L237.2 37.2 L254.4 37.8 L271.6 38.6 L288.8 39.4 L306.0 40.2 L323.2 41.2 L340.4 42.2 L357.6 43.3 L374.8 44.5 L392.0 45.7 L409.2 47.0 L426.4 48.3 L443.6 49.7 L460.8 51.2 L478.0 52.7 L495.2 54.3 L512.4 56.0 L529.6 57.7 L546.8 59.5 L564.0 61.3 L581.2 63.2 L598.4 65.1 L615.6 67.1 L632.8 69.1 L650.0 71.2 L667.2 73.4 L684.4 75.5 L701.6 77.8 L718.8 80.0 L736.0 82.4 L753.2 84.7 L770.4 87.1 L787.6 89.6 L804.8 92.0 L822.0 94.5 L839.2 97.1 L856.4 99.7 L873.6 102.3 L890.8 105.0 L908.0 107.7 L925.2 110.4 L942.4 113.2 L959.6 115.9 L976.8 118.8 L994.0 121.6 L1011.2 124.5 L1028.4 127.4 L1045.6 130.3 L1062.8 133.3 L1080.0 136.2" class="ev-curve"/><text x="193.8" y="32" text-anchor="middle" class="ev-lab band">Daylight</text><text x="486.4" y="32" text-anchor="middle" class="ev-lab band">Twilight</text><text x="701.4" y="32" text-anchor="middle" class="ev-lab best">Best window</text><text x="924.8" y="32" text-anchor="middle" class="ev-lab band">Core too low / set</text><g><line x1="780.7" x2="780.7" y1="96.5" y2="122.5" stroke="#e8edf5" stroke-opacity="0.6"/><text x="784.7" y="106.5" class="ev-lab moon">moonset 8:33 (static)</text></g><circle cx="999.4" cy="122.5" r="4" fill="#ef4444"/><text x="991.4" y="138.5" text-anchor="end" class="ev-lab red">core sets 9:37 PM</text><circle cx="701.4" cy="77.7" r="5" fill="#fff" stroke="#f0a030" stroke-width="2"/><text x="709.4" y="69.7" class="ev-lab white">aim 8:10 PM · 13°</text><g class="now-mark"><line x1="487.2" x2="487.2" y1="38" y2="158.0" stroke="#2dd4bf" stroke-width="2"/><rect x="438.2" y="38" width="98.0" height="16" rx="8" fill="#2dd4bf"/><text x="487.2" y="49.5" text-anchor="middle" class="ev-now">EXAMPLE 7:07 PM</text><circle cx="487.2" cy="53.6" r="4.5" fill="#2dd4bf" stroke="#04201c" stroke-width="1.5"/></g><!--/S:elev-svg--></svg>
     </div>
   </section>
 
@@ -1670,8 +1586,8 @@
     <div class="bh-layout">
       <div>
         <div class="card sunset-card">
-          <div class="card-title">Sunset confirm</div>
-          <p class="prompt" id="bh-prompt"><!--S:bh-prompt-->Sunset was <strong>6:25 PM</strong>, starting blue hour at <strong>6:55 PM</strong>. OK?<!--/S:bh-prompt--></p>
+          <div class="card-title">Series start</div>
+          <p class="prompt" id="bh-prompt"><!--S:bh-prompt-->Start the blue-hour series at <strong>6:55 PM</strong>?<!--/S:bh-prompt--></p>
           <div class="btn-row">
             <button class="btn primary">Confirm</button>
             <button class="btn">Edit</button>
@@ -2181,8 +2097,7 @@
     v['elev-svg'] = elevSvg(s, opts.elevW);
     // capture
     if (s.bh) {
-      var past = s.now >= s.sunset;
-      v['bh-prompt'] = 'Sunset ' + (past ? 'was' : 'is at') + ' <strong>' + fmt(s.sunset) + '</strong>, starting blue hour at <strong>' + fmt(s.bh.start) + '</strong>. OK?';
+      v['bh-prompt'] = 'Start the blue-hour series at <strong>' + fmt(s.bh.start) + '</strong>?';
       v['bh-range'] = fmt(s.bh.start) + ' → ' + fmt(s.bh.end) + ' · 17 slots every 90 s';
     }
     v['bh-gps'] = src.kind === 'gps' ? 'GPS fix <span class="ok">· browser ±' + Math.round(src.acc || 0) + ' m</span>' : src.kind === 'static' ? 'GPS fix <span class="ok">· 12 m · 2 min ago</span>' : 'GPS <span class="warn-t">· fallback location 36.2°N, 89.9°W</span>';
@@ -2194,7 +2109,8 @@
     return v;
   }
 
-  root.SkyEngine = { compute: compute, view: view, sunAlt: sunAlt, coreAltAz: coreAltAz, fmt: fmt, FALLBACK: FALLBACK };
+  function galAltAz(ms, l, b, lat, lon) { var e = galToEq(l, b), p = precess(ms, e[0], e[1]); return radecToAltAz(ms, p[0], p[1], lat, lon); }
+  root.SkyEngine = { compute: compute, view: view, sunAlt: sunAlt, coreAltAz: coreAltAz, galAltAz: galAltAz, fmt: fmt, FALLBACK: FALLBACK };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>
@@ -2209,11 +2125,7 @@
   function update() {
     var n = now(), s = E.compute(n, loc);
     src.clock = (isNaN(sim) ? 'Live sky · ' : 'Simulated · ') + E.fmt(n, false) + '<span class="cb-extra"> · refresh 30 s</span>';
-    var es = document.getElementById('elev-svg'), ew = es && es.parentElement ? es.parentElement.clientWidth - 32 : 0;
-    if (ew <= 0) ew = Math.min(document.documentElement.clientWidth, 1280) - 64;
-    var narrow = ew > 0 && ew < 700, W = narrow ? Math.max(300, Math.round(ew)) : 1100;
-    if (es) { es.setAttribute('viewBox', '0 0 ' + W + ' 190'); es.setAttribute('preserveAspectRatio', narrow ? 'xMidYMid meet' : 'none'); }
-    var v = E.view(s, src, { elevW: W });
+    var v = E.view(s, src, { elevW: 1100 });
     for (var id in v) { var el = document.getElementById(id); if (el) el.innerHTML = v[id]; }
     var b = document.getElementById('clock-badge'); if (b) b.classList.toggle('sim', !isNaN(sim));
     var tr = document.getElementById('bh-slots'), cur = tr && tr.querySelector('.slot.current');
@@ -2225,11 +2137,237 @@
   var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(update, 150); });
   window.addEventListener('orientationchange', function () { setTimeout(update, 300); });
   window.__skyUpdate = update;
+  window.__sky = { now: now, loc: function () { return loc; } };
   update(); setInterval(update, 30000);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) update(); });
   if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (p) {
-    loc = { lat: p.coords.latitude, lon: p.coords.longitude }; src = { kind: 'gps', acc: p.coords.accuracy }; update();
+    loc = { lat: p.coords.latitude, lon: p.coords.longitude }; src = { kind: 'gps', acc: p.coords.accuracy }; update(); if (window.__arKick) window.__arKick();
   }, function () {}, { timeout: 8000, maximumAge: 600000 });
+})();
+</script>
+<script>
+/* Sky AR — one minimal AR view. Rear camera + device orientation -> virtual pinhole camera;
+   galactic band from SkyEngine (gal -> alt/az) drawn with per-point perspective on canvas 2D.
+   No numbers on screen; only the time-of-day label on the slider thumb. */
+(function () {
+  var E = window.SkyEngine, S = window.__sky; if (!E || !S) return;
+  var D = Math.PI / 180, root = document.getElementById('ar'); if (!root) return;
+  var cv = document.getElementById('ar-sky'), ctx = cv.getContext('2d'), video = document.getElementById('ar-video');
+  var startBtn = document.getElementById('ar-start'), demoTag = document.getElementById('ar-demo');
+  var track = document.getElementById('ar-track'), thumb = document.getElementById('ar-thumb'), tlab = document.getElementById('ar-tlab'), nowBtn = document.getElementById('ar-now');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('js');
+
+  /* ---------- deterministic particles in galactic cartesian ---------- */
+  var seed = 7; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  function gauss() { return Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(2 * Math.PI * rnd()); }
+  function gv(l, b) { l *= D; b *= D; return [Math.cos(b) * Math.cos(l), Math.cos(b) * Math.sin(l), Math.sin(b)]; }
+  var band = [], field = [], ribbon = [];
+  for (var i = 0; i < 2600; i++) {
+    var l = (rnd() * 2 - 1) * 100, core = Math.exp(-(l * l) / (2 * 22 * 22));
+    var sig = 2.6 + 5.5 * core, b = gauss() * sig * (0.6 + 0.4 * rnd());
+    var a = (0.25 + 0.75 * core) * Math.exp(-Math.abs(b) / (sig * 1.4)) * (0.35 + 0.65 * Math.pow(rnd(), 2.2));
+    if (l > -5 && l < 45 && Math.abs(b - 0.6) < 1.4) a *= 0.35;             // Great Rift dust lane
+    band.push({ v: gv(l, b), a: Math.min(1, a * 1.25), s: 0.5 + rnd() * (rnd() < 0.05 ? 1.6 : 0.8), w: rnd() * 6.28, warm: core * rnd() });
+  }
+  for (i = 0; i < 900; i++) { var z = rnd() * 2 - 1, ph = rnd() * 6.28, r = Math.sqrt(1 - z * z); field.push({ v: [r * Math.cos(ph), r * Math.sin(ph), z], a: 0.15 + 0.85 * Math.pow(rnd(), 3), s: 0.4 + rnd() * 0.9, w: rnd() * 6.28 }); }
+  for (l = -100; l <= 100; l += 2.5) ribbon.push({ l: l, c: gv(l, 0), up: gv(l, 6), core: Math.exp(-(l * l) / (2 * 18 * 18)), dust: (l > -5 && l < 45) ? 0.55 : 1 });
+
+  /* ---------- time / sky matrix (galactic -> ENU) via the shared engine ---------- */
+  var tSel = null, M = null, Mt = 0, sunA = 0, range = [0, 0];
+  function enu(p) { var c = Math.cos(p.alt * D); return [c * Math.sin(p.az * D), c * Math.cos(p.az * D), Math.sin(p.alt * D)]; }
+  function matrix(t) {
+    var L = S.loc(), X = enu(E.galAltAz(t, 0, 0, L.lat, L.lon)), Y = enu(E.galAltAz(t, 90, 0, L.lat, L.lon)), Z = enu(E.galAltAz(t, 0, 90, L.lat, L.lon));
+    return [X, Y, Z];
+  }
+  function mul(m, v) { return [m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2], m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2], m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2]]; }
+  function curT() { var n = S.now(); return tSel == null ? n : Math.max(n, tSel); }
+  function calcRange() {
+    var n = S.now(), L = S.loc(), step = 5 * 60000, t = n, f = function (x) { return E.sunAlt(x, L.lat, L.lon); };
+    var night = f(n) < -0.833, end = n + 12 * 3600000;
+    for (; t < n + 30 * 3600000; t += step) { var a = f(t), b = f(t + step); if (!night && a >= -0.833 && b < -0.833) night = true; else if (night && a < -0.833 && b >= -0.833) { end = t + step; break; } }
+    if (end - n < 3 * 3600000) end = n + 12 * 3600000;
+    range = [n, end];
+  }
+  function refresh(force) {
+    var t = curT(); if (!force && M && Math.abs(t - Mt) < 20000) return;
+    var L = S.loc(); M = matrix(t); Mt = t; sunA = E.sunAlt(t, L.lat, L.lon);
+  }
+
+  /* ---------- camera pose (forward / right / up in ENU), low-pass filtered ---------- */
+  var posed = false, pose = { f: [0, 1, 0.2], u: [0, -0.2, 1] }, target = null, live = { cam: false, ori: false }, lastOri = 0, off = null, absolute = false;
+  function nrm(v) { var m = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / m, v[1] / m, v[2] / m]; }
+  function cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+  function dot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  function scrAngle() { var o = screen.orientation && typeof screen.orientation.angle === 'number' ? screen.orientation.angle : (window.orientation || 0); return o * D; }
+  function onOri(e, isAbs) {
+    if (e.beta == null) return;
+    var al = e.alpha || 0;
+    if (typeof e.webkitCompassHeading === 'number' && e.webkitCompassHeading >= 0) {     // iOS: true-ish compass heading
+      var o = ((e.webkitCompassHeading - (360 - al)) % 360 + 540) % 360 - 180;
+      off = off == null ? o : off + ((((o - off) % 360) + 540) % 360 - 180) * 0.05; al = al - off;
+    } else if (!isAbs && absolute) return;                                              // prefer absolute stream when present
+    var A = al * D, B = e.beta * D, G = (e.gamma || 0) * D, cA = Math.cos(A), sA = Math.sin(A), cB = Math.cos(B), sB = Math.sin(B), cG = Math.cos(G), sG = Math.sin(G);
+    var x = [cA * cG - sA * sB * sG, cG * sA + cA * sB * sG, -cB * sG], y = [-cB * sA, cA * cB, sB], z = [cA * sG + cG * sA * sB, sA * sG - cA * cG * sB, cB * cG];
+    var q = scrAngle(), up = [Math.sin(q) * x[0] + Math.cos(q) * y[0], Math.sin(q) * x[1] + Math.cos(q) * y[1], Math.sin(q) * x[2] + Math.cos(q) * y[2]];
+    target = { f: [-z[0], -z[1], -z[2]], u: up }; live.ori = true; lastOri = Date.now(); setDemo();
+  }
+  function listenOri() {
+    if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', function (e) { absolute = true; onOri(e, true); });
+    window.addEventListener('deviceorientation', function (e) { onOri(e, false); });
+  }
+  function demoPose(ms) {
+    var L = S.loc(), t = curT(), c = E.coreAltAz(t, L.lat, L.lon), k = reduce ? 0 : ms / 1000;
+    var yaw = c.az + 28 * Math.sin(k * 0.07), pitch = Math.max(12, Math.min(45, c.alt * 0.6 + 8)) + 5 * Math.sin(k * 0.05);
+    if (c.alt < -5) pitch = 14 + 4 * Math.sin(k * 0.05);
+    var Y = yaw * D, P = pitch * D, f = [Math.cos(P) * Math.sin(Y), Math.cos(P) * Math.cos(Y), Math.sin(P)], r = [Math.cos(Y), -Math.sin(Y), 0];
+    return { f: f, u: cross(r, f) };
+  }
+  function smooth(tg, k) {
+    pose.f = nrm([pose.f[0] + (tg.f[0] - pose.f[0]) * k, pose.f[1] + (tg.f[1] - pose.f[1]) * k, pose.f[2] + (tg.f[2] - pose.f[2]) * k]);
+    pose.u = nrm([pose.u[0] + (tg.u[0] - pose.u[0]) * k, pose.u[1] + (tg.u[1] - pose.u[1]) * k, pose.u[2] + (tg.u[2] - pose.u[2]) * k]);
+  }
+  function demoMode() { return !(live.ori && Date.now() - lastOri < 2000); }
+  function setDemo() { var d = demoMode() || !live.cam; demoTag.hidden = !d; root.classList.toggle('cam', live.cam); }
+
+  /* ---------- start: permissions (must be called from the tap) ---------- */
+  startBtn.addEventListener('click', function () {
+    startBtn.disabled = true;
+    var p1 = (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') ? DeviceOrientationEvent.requestPermission().catch(function () { return 'denied'; }) : Promise.resolve('granted');
+    var p2 = navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).catch(function () { return null; }) : Promise.resolve(null);
+    p1.then(function (st) { if (st === 'granted') listenOri(); });
+    p2.then(function (stream) {
+      if (stream) { video.srcObject = stream; video.play().catch(function () {}); live.cam = true; }
+      startBtn.hidden = true; setTimeout(setDemo, 1500); setDemo();
+    });
+  });
+  function stopCam(on) { var s = video.srcObject; if (s && s.getVideoTracks) s.getVideoTracks().forEach(function (t) { t.enabled = on; }); }
+
+  /* ---------- vertical time slider ---------- */
+  function frac() { return range[1] > range[0] ? Math.max(0, Math.min(1, (curT() - range[0]) / (range[1] - range[0]))) : 0; }
+  function paintSlider() {
+    var f = frac(); thumb.style.top = (f * 100) + '%';
+    tlab.textContent = E.fmt(curT(), false); nowBtn.hidden = tSel == null; thumb.setAttribute('aria-valuetext', tSel == null ? 'Now' : E.fmt(curT(), false));
+  }
+  function setFromY(y) {
+    var r = track.getBoundingClientRect(), f = Math.max(0, Math.min(1, (y - r.top) / r.height));
+    tSel = f < 0.012 ? null : range[0] + f * (range[1] - range[0]); refresh(true); paintSlider();
+  }
+  var drag = false;
+  track.addEventListener('pointerdown', function (e) { drag = true; track.setPointerCapture && track.setPointerCapture(e.pointerId); setFromY(e.clientY); e.preventDefault(); });
+  track.addEventListener('pointermove', function (e) { if (drag) setFromY(e.clientY); });
+  ['pointerup', 'pointercancel'].forEach(function (n) { track.addEventListener(n, function () { drag = false; }); });
+  thumb.addEventListener('keydown', function (e) {
+    var st = (range[1] - range[0]) / 48, t = curT();
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') tSel = Math.min(range[1], t + st); else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { tSel = t - st; if (tSel <= S.now() + 1000) tSel = null; } else return;
+    e.preventDefault(); refresh(true); paintSlider();
+  });
+  nowBtn.addEventListener('click', function (e) { e.stopPropagation(); tSel = null; refresh(true); paintSlider(); });
+  window.__arSetTime = function (ms) { calcRange(); tSel = ms == null ? null : ms; refresh(true); paintSlider(); };
+
+  /* ---------- render ---------- */
+  var W = 0, H = 0, dpr = 1, fpx = 500;
+  function size() {
+    var r = cv.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = Math.max(1, r.width); H = Math.max(1, r.height); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  }
+  function focal() { // pinhole focal length in CSS px: assumed iPhone main camera ~65° across the sensor's long side, video shown object-fit: cover
+    var hf = 65 * D, vw = video.videoWidth, vh = video.videoHeight;
+    if (live.cam && vw && vh) { var sc = Math.max(W / vw, H / vh); return sc * (Math.max(vw, vh) / 2) / Math.tan(hf / 2); }
+    var lw = Math.max(W, H), sw = Math.min(W, H), lv = Math.max(lw, sw * 4 / 3); // same model with an assumed 4:3 frame
+    return (lv / 2) / Math.tan(hf / 2) * (W > H ? 1 : 1);
+  }
+  function sstep(a, b, x) { x = Math.max(0, Math.min(1, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
+  function frame(ms) {
+    raf = 0; if (!visible()) return;
+    var r = cv.getBoundingClientRect(); if (Math.abs(r.width - W) > 0.5 || Math.abs(r.height - H) > 0.5) size();
+    refresh(false); setDemo();
+    var tg = demoMode() ? demoPose(ms) : target; if (tg) { if (!posed) { pose = { f: tg.f, u: tg.u }; posed = true; } smooth(tg, demoMode() ? 0.12 : 0.18); }
+    fpx = focal();
+    var f = pose.f, rt = nrm(cross(f, pose.u)), u = cross(rt, f), cx = W / 2, cy = H / 2;
+    var night = sstep(-4, -16, sunA), demo = !live.cam, k = reduce ? 0 : ms / 1000;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, W, H);
+    function proj(v) { var zc = dot(v, f); if (zc < 0.06) return null; return { x: cx + fpx * dot(v, rt) / zc, y: cy - fpx * dot(v, u) / zc, z: zc, alt: Math.asin(Math.max(-1, Math.min(1, v[2]))) / D }; }
+    if (demo) {     // simulated sky: colour from the sun's altitude at the chosen time
+      var day = 1 - night, g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, 'rgb(' + Math.round(4 + 26 * day) + ',' + Math.round(7 + 50 * day) + ',' + Math.round(18 + 90 * day) + ')');
+      g.addColorStop(1, 'rgb(' + Math.round(10 + 60 * day) + ',' + Math.round(14 + 60 * day) + ',' + Math.round(30 + 80 * day) + ')');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    ctx.globalCompositeOperation = 'lighter';
+    var bandA = demo ? 0.12 + 0.88 * night : 0.3 + 0.7 * night;
+    if (demo && night > 0.02) for (var i = 0; i < field.length; i++) {
+      var s = field[i], v = mul(M, s.v), p = proj(v); if (!p || p.x < -4 || p.y < -4 || p.x > W + 4 || p.y > H + 4) continue;
+      var a = s.a * night * sstep(-1, 12, p.alt) * (0.85 + 0.15 * Math.sin(k * 1.7 + s.w)); if (a < 0.02) continue;
+      ctx.fillStyle = 'rgba(220,230,255,' + a.toFixed(3) + ')'; ctx.fillRect(p.x, p.y, s.s, s.s);
+    }
+    // volumetric-looking ribbon: three soft layers of perspective-sized glow blobs along the plane
+    var layers = [[15, 'rgba(90,150,200,', 0.045], [7, 'rgba(170,190,230,', 0.07], [3.5, 'rgba(255,214,160,', 0.11]];
+    for (var L = 0; L < 3; L++) for (i = 0; i < ribbon.length; i++) {
+      var rb = ribbon[i], c3 = mul(M, rb.c), pc = proj(c3); if (!pc) continue;
+      var w = layers[L][0] * (0.6 + 0.8 * rb.core), rad = fpx * Math.tan(w * D) / pc.z;
+      if (pc.x < -rad || pc.y < -rad || pc.x > W + rad || pc.y > H + rad) continue;
+      var dim = pc.alt < 0 ? 0.22 : 0.4 + 0.6 * sstep(0, 12, pc.alt), al = layers[L][2] * (0.35 + 0.9 * rb.core) * rb.dust * dim * bandA;
+      var gr = ctx.createRadialGradient(pc.x, pc.y, 0, pc.x, pc.y, rad);
+      gr.addColorStop(0, layers[L][1] + al.toFixed(3) + ')'); gr.addColorStop(1, layers[L][1] + '0)');
+      ctx.fillStyle = gr; ctx.fillRect(pc.x - rad, pc.y - rad, rad * 2, rad * 2);
+    }
+    // core: brighter dusty bulge, elongated along the band
+    var cP = proj(mul(M, gv(0, 0))), cAlt = Math.asin(mul(M, gv(0, 0))[2]) / D;
+    if (cP) for (var j = -4; j <= 4; j++) {
+      var q = proj(mul(M, gv(j * 2.2, -0.4))); if (!q) continue;
+      var rr = fpx * Math.tan((4.6 - Math.abs(j) * 0.55) * D) / q.z, dm = cAlt < 0 ? 0.25 : 0.45 + 0.55 * sstep(0, 12, cAlt), aa = 0.2 * dm * bandA * (1 - Math.abs(j) / 6);
+      var cg = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, rr);
+      cg.addColorStop(0, 'rgba(255,222,170,' + aa.toFixed(3) + ')'); cg.addColorStop(0.45, 'rgba(255,170,90,' + (aa * 0.55).toFixed(3) + ')'); cg.addColorStop(1, 'rgba(255,170,90,0)');
+      ctx.fillStyle = cg; ctx.fillRect(q.x - rr, q.y - rr, rr * 2, rr * 2);
+    }
+    // star particles along the band
+    for (i = 0; i < band.length; i++) {
+      var st = band[i], vv = mul(M, st.v), pp = proj(vv); if (!pp || pp.x < -3 || pp.y < -3 || pp.x > W + 3 || pp.y > H + 3) continue;
+      var a2 = st.a * bandA * (pp.alt < 0 ? 0.2 : sstep(-2, 10, pp.alt) * 0.8 + 0.2) * (0.8 + 0.2 * Math.sin(k * 2.1 + st.w)); if (a2 < 0.025) continue;
+      ctx.fillStyle = st.warm > 0.35 ? 'rgba(255,228,190,' + a2.toFixed(3) + ')' : 'rgba(225,235,255,' + a2.toFixed(3) + ')';
+      var sz = st.s * Math.min(1.6, 0.7 + 0.5 / pp.z); ctx.fillRect(pp.x - sz / 2, pp.y - sz / 2, sz, sz);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    // horizon: a straight line in a pinhole image; ground fade on the side below it
+    var ha = rt[2], hb = u[2], hc = f[2], hn = Math.hypot(ha, hb);
+    if (hn > 1e-3) {
+      var x0 = -hc * ha / (hn * hn), y0 = -hc * hb / (hn * hn), px0 = cx + fpx * x0, py0 = cy - fpx * y0, nx = ha / hn, ny = -hb / hn; // (nx,ny) points to the sky side
+      var gg = ctx.createLinearGradient(px0 + nx * 18, py0 + ny * 18, px0 - nx * H * 0.55, py0 - ny * H * 0.55);
+      if (demo) { gg.addColorStop(0, 'rgba(240,160,48,0)'); gg.addColorStop(0.03, 'rgba(240,160,48,' + (0.10 * night + 0.03).toFixed(3) + ')'); gg.addColorStop(0.055, 'rgba(6,9,15,0.97)'); gg.addColorStop(1, 'rgba(3,5,9,1)'); }
+      else { gg.addColorStop(0, 'rgba(10,14,23,0)'); gg.addColorStop(0.06, 'rgba(10,14,23,0.12)'); gg.addColorStop(1, 'rgba(10,14,23,0.5)'); }
+      ctx.fillStyle = gg; ctx.fillRect(0, 0, W, H);
+      var tx = -ny, ty = nx, D2 = W + H;
+      ctx.strokeStyle = 'rgba(200,225,255,0.28)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(px0 - tx * D2, py0 - ty * D2); ctx.lineTo(px0 + tx * D2, py0 + ty * D2); ctx.stroke();
+      ctx.strokeStyle = 'rgba(45,212,191,0.10)'; ctx.lineWidth = 6; ctx.stroke();
+    } else if (hc < 0) { ctx.fillStyle = demo ? 'rgba(4,6,10,0.97)' : 'rgba(10,14,23,0.4)'; ctx.fillRect(0, 0, W, H); }
+    // off-screen hint: subtle edge glow + chevron toward the core
+    var cv3 = mul(M, gv(0, 0)), zc = dot(cv3, f), inView = cP && cP.x > 0 && cP.y > 0 && cP.x < W && cP.y < H;
+    if (!inView) {
+      var dx = dot(cv3, rt), dy = -dot(cv3, u); if (Math.hypot(dx, dy) < 1e-4) { dx = 0; dy = 1; }
+      var m = Math.hypot(dx, dy); dx /= m; dy /= m;
+      var pad = 34, sx = Math.abs(dx) > 1e-6 ? (W / 2 - pad) / Math.abs(dx) : 1e9, sy = Math.abs(dy) > 1e-6 ? (H / 2 - pad - 70) / Math.abs(dy) : 1e9, sc = Math.min(sx, sy);
+      var ex = cx + dx * sc, ey = cy + dy * sc + (dy > 0 ? 0 : 0), pulse = reduce ? 0.8 : 0.7 + 0.3 * Math.sin(k * 2.2), hA = (cAlt < 0 ? 0.5 : 1) * pulse;
+      var eg = ctx.createRadialGradient(ex + dx * 30, ey + dy * 30, 0, ex + dx * 30, ey + dy * 30, 90);
+      eg.addColorStop(0, 'rgba(255,200,130,' + (0.35 * hA).toFixed(3) + ')'); eg.addColorStop(1, 'rgba(255,200,130,0)');
+      ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = eg; ctx.fillRect(ex - 120 + dx * 30, ey - 120 + dy * 30, 240, 240); ctx.globalCompositeOperation = 'source-over';
+      ctx.save(); ctx.translate(ex, ey); ctx.rotate(Math.atan2(dy, dx));
+      ctx.strokeStyle = 'rgba(255,214,160,' + (0.75 * hA).toFixed(3) + ')'; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(-6, -10); ctx.lineTo(6, 0); ctx.lineTo(-6, 10); ctx.stroke(); ctx.restore();
+    }
+    root.dataset.core = inView ? (cAlt < 0 ? 'below' : 'in') : 'out';
+    if (!demo && video.readyState < 2) {} // video still starting
+    raf = requestAnimationFrame(frame);
+  }
+  var raf = 0;
+  function visible() { var s = document.getElementById('screen-plan'); return s && s.offsetParent !== null && !document.hidden; }
+  function kick() { if (visible()) { stopCam(true); if (!raf) { size(); refresh(true); paintSlider(); raf = requestAnimationFrame(frame); } } else stopCam(false); }
+  window.__arKick = function () { calcRange(); refresh(true); paintSlider(); kick(); };
+  window.addEventListener('resize', function () { size(); });
+  document.addEventListener('visibilitychange', kick);
+  calcRange(); refresh(true); paintSlider(); setDemo();
+  setInterval(function () { calcRange(); refresh(true); paintSlider(); }, 30000);
+  kick();
 })();
 </script>
 <script>
@@ -2252,7 +2390,9 @@
     Object.keys(screens).forEach(function (k) {
       screens[k].classList.toggle('active', k === id);
     });
+    document.body.classList.toggle('ar-full', id === 'plan');
     if (window.__skyUpdate) window.__skyUpdate();
+    if (window.__arKick) window.__arKick();
   }
   controls.forEach(function (c) {
     c.addEventListener('click', function () {
@@ -2262,9 +2402,6 @@
       if (window.matchMedia('(max-width: 700px)').matches) window.scrollTo(0, 0);
       if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) {} }
     });
-  });
-  document.querySelectorAll('.lp-dismiss, .lp-actions .btn:first-child').forEach(function (b) {
-    b.addEventListener('click', function () { var c = b.closest('.lp-card'); c.classList.add('dismissed'); });
   });
   var h = location.hash.replace('#', '');
   select(h === 'all' || screens[h] ? h : 'live');
